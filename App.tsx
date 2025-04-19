@@ -6,7 +6,7 @@ function App() {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const [loading, setLoading] = useState(false); // ✅ Step 1: Loading state
+  const [loading, setLoading] = useState(false); //
 
   const handleCheck = async () => {
     if (!url || !url.startsWith("http")) {
@@ -16,11 +16,11 @@ function App() {
       return;
     }
 
-    setLoading(true); // ✅ Start loading
+    setLoading(true); // Start loading
 
     try {
       const response = await fetch(
-        "https://ds440capstone-2.onrender.com/predict",
+        "https://8d54-35-221-182-198.ngrok-free.app/analyze",
         {
           method: "POST",
           headers: {
@@ -42,7 +42,7 @@ function App() {
       alert("Something went wrong. Please try again.");
     }
 
-    setLoading(false); // ✅ Stop loading
+    setLoading(false); // Stop loading
   };
 
   return (
@@ -71,7 +71,7 @@ function App() {
           />
           <button
             onClick={handleCheck}
-            disabled={loading} // ✅ Step 2: Disable while loading
+            disabled={loading} // Step 2: Disable while loading
             className={`px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
@@ -80,7 +80,7 @@ function App() {
           </button>
         </div>
 
-        {/* ✅ Show loading message */}
+        {/* Show loading message */}
         {loading && (
           <p className="text-sm text-gray-600 dark:text-gray-300">
             Analyzing article... please wait ⏳
