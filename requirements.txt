@@ -1,7 +1,0 @@
-flask
-flask-cors
-tensorflow
-nltk
-newspaper3k
-lime
-gunicorn
