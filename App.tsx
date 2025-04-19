@@ -6,7 +6,8 @@ function App() {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const [loading, setLoading] = useState(false); //
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
   const handleCheck = async () => {
     if (!url || !url.startsWith("http")) {
@@ -16,11 +17,11 @@ function App() {
       return;
     }
 
-    setLoading(true); // Start loading
+    setLoading(true);
 
     try {
       const response = await fetch(
-        "https://8d54-35-221-182-198.ngrok-free.app/analyze",
+        "https://3835-34-82-203-119.ngrok-free.app/analyze",
         {
           method: "POST",
           headers: {
@@ -42,7 +43,35 @@ function App() {
       alert("Something went wrong. Please try again.");
     }
 
-    setLoading(false); // Stop loading
+    setLoading(false);
+  };
+
+  // Feedback submit function
+  const handleFeedbackSubmit = async () => {
+    if (!feedback) {
+      alert("Please enter your feedback before submitting.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "https://3835-34-82-203-119.ngrok-free.app/send-feedback",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ feedback }),
+        }
+      );
+
+      const data = await response.json();
+      alert(data.message);
+      setFeedback("");
+    } catch (error) {
+      console.error("Error sending feedback:", error);
+      alert("There was a problem sending your feedback.");
+    }
   };
 
   return (
@@ -71,7 +100,7 @@ function App() {
           />
           <button
             onClick={handleCheck}
-            disabled={loading} // Step 2: Disable while loading
+            disabled={loading}
             className={`px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
@@ -80,15 +109,31 @@ function App() {
           </button>
         </div>
 
-        {/* Show loading message */}
         {loading && (
           <p className="text-sm text-gray-600 dark:text-gray-300">
             Analyzing article... please wait ⏳
           </p>
         )}
 
-        {/* Results */}
         {result && <ResultCard result={result} />}
+
+        {/* Feedback Box */}
+        <div className="w-full max-w-2xl mt-8">
+          <h2 className="text-xl font-semibold mb-2">Submit Feedback</h2>
+          <textarea
+            className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+            rows={4}
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            placeholder="Was this prediction helpful or accurate? Let us know!"
+          />
+          <button
+            onClick={handleFeedbackSubmit}
+            className="mt-3 bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded transition"
+          >
+            Submit Feedback
+          </button>
+        </div>
       </div>
     </div>
   );
