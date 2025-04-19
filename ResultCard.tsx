@@ -1,68 +1,57 @@
-// components/ResultCard.tsx
 import React from "react";
 
-type ResultProps = {
+interface ResultProps {
   result: {
     probability: number;
     credibility: string;
     keywords: string[];
   };
-};
+}
 
-function ResultCard({ result }: ResultProps) {
-  if (!result) return null;
+const ResultCard: React.FC<ResultProps> = ({ result }) => {
+  const { probability, credibility, keywords } = result;
 
   return (
-    <div className="mt-6 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-2xl">
-      <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-        Content Evaluation
-      </h2>
+    <div className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mt-6">
+      <h2 className="text-2xl font-semibold mb-4">Content Evaluation</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div>
-          <p className="font-medium text-gray-700 dark:text-gray-300">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
             Fake News Score
           </p>
-          <div className="mt-1 px-3 py-2 rounded bg-blue-100 dark:bg-blue-700 text-blue-900 dark:text-white inline-block font-semibold">
-            {(result.probability * 100).toFixed(2)}%
+          <div className="text-lg font-bold text-blue-500">
+            {(probability * 100).toFixed(2)}%
           </div>
         </div>
-
         <div>
-          <p className="font-medium text-gray-700 dark:text-gray-300">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
             Source Credibility
           </p>
-          <div className="mt-1 px-3 py-2 rounded bg-green-100 dark:bg-green-700 text-green-900 dark:text-white inline-block font-semibold">
-            {result.credibility}
+          <div
+            className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${
+              credibility === "High" ? "bg-green-600" : "bg-red-600"
+            }`}
+          >
+            {credibility}
           </div>
         </div>
       </div>
 
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">
+      <div>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
           Highlighted Words/Phrases
-        </h3>
-        <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 text-sm text-gray-800 dark:text-gray-100">
-          <ul className="list-disc pl-5">
-            {result.keywords.map((word, index) => (
+        </p>
+        <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-sm text-gray-800 dark:text-gray-100">
+          <ul className="list-disc list-inside space-y-1">
+            {keywords.map((word, index) => (
               <li key={index}>{word}</li>
             ))}
           </ul>
         </div>
       </div>
-
-      <div>
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">
-          User Feedback
-        </h3>
-        <textarea
-          placeholder="Share your feedback..."
-          className="w-full mt-1 p-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-          rows={4}
-        />
-      </div>
     </div>
   );
-}
+};
 
 export default ResultCard;
