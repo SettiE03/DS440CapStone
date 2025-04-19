@@ -20,7 +20,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "https://2eba-35-237-188-255.ngrok-free.app/analyze",
+        "https://ds440capstone-2.onrender.com/predict",
         {
           method: "POST",
           headers: {
