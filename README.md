@@ -7,6 +7,7 @@
 ## The enhanced2news.ipynb does not need to be used at all. It was used for our model training.
 
 ## How To (Using google colab and React)
+## Link to video of the How To: https://psu.mediaspace.kaltura.com/media/Evan%20Settipanes%20Zoom%20Meeting/1_6jucae66
 ### 1) Starting in colab:
 #### -- You need to use the realbackend.ipynb from this repo
 #### -- Also use the lstm_model.h5 and tokenizer.pkl from this repo
