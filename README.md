@@ -1,5 +1,8 @@
 # DS440 CapStone
-# Fake News Detector Application: Dalton Cymbalski and Evan Settipane 
+# Fake News Detector Application: Dalton Cymbalski and Evan Settipane
+
+# Datasets used
+### We used the LIAR dataset as seen in the repo, as well as a kaggle dataset, "Fake News Detection Datasets" utilizing the Fake.csv and True.csv files. Link to kaggle: https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets
 
 ## How To (Using google colab and React)
 ### 1) Starting in colab:
