@@ -20,16 +20,16 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "https://3835-34-82-203-119.ngrok-free.app/analyze",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ url }),
-        }
-      );
+  const response = await fetch(
+    "https://fake-news-deploy.onrender.com/analyze",  // 🔁 new Render backend
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url }),
+    }
+  );
 
       const data = await response.json();
 
@@ -53,17 +53,16 @@ function App() {
       return;
     }
 
-    try {
-      const response = await fetch(
-        "https://3835-34-82-203-119.ngrok-free.app/send-feedback",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ feedback }),
-        }
-      );
+   const response = await fetch(
+  "https://fake-news-deploy.onrender.com/send-feedback",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ feedback }),
+  }
+);
 
       const data = await response.json();
       alert(data.message);
