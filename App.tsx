@@ -1,6 +1,6 @@
 // App.tsx
 import React, { useState } from "react";
-import ResultCard from "./components/ResultCard";
+import ResultCard from "./ResultCard";
 
 function App() {
   const [url, setUrl] = useState("");
