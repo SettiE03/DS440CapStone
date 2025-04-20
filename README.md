@@ -47,5 +47,6 @@
       );
 
 ### 3) Everything should be good to go now
+#### When submitting a url it will take the application a little time to run
 #### Just put a url of a news article you want to check in the box and click submit
 #### If you want to try the Submit Feedback box as well the realbackend code still needs to be running, just an FYI. Whatever feedback you send gets sent to an email we created for the project
