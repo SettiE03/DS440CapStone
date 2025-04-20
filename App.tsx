@@ -7,7 +7,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState(""); // ✅ New state for feedback
 
   const handleCheck = async () => {
     if (!url || !url.startsWith("http")) {
@@ -20,16 +20,16 @@ function App() {
     setLoading(true);
 
     try {
-  const response = await fetch(
-    "https://fake-news-deploy.onrender.com/analyze",  // 🔁 new Render backend
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ url }),
-    }
-  );
+      const response = await fetch(
+        "https://3835-34-82-203-119.ngrok-free.app/analyze",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url }),
+        }
+      );
 
       const data = await response.json();
 
@@ -46,23 +46,24 @@ function App() {
     setLoading(false);
   };
 
-  // Feedback submit function
+  // ✅ Feedback submit function
   const handleFeedbackSubmit = async () => {
     if (!feedback) {
       alert("Please enter your feedback before submitting.");
       return;
     }
 
-   const response = await fetch(
-  "https://fake-news-deploy.onrender.com/send-feedback",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ feedback }),
-  }
-);
+    try {
+      const response = await fetch(
+        "https://3835-34-82-203-119.ngrok-free.app/send-feedback",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ feedback }),
+        }
+      );
 
       const data = await response.json();
       alert(data.message);
@@ -116,7 +117,7 @@ function App() {
 
         {result && <ResultCard result={result} />}
 
-        {/* Feedback Box */}
+        {/* ✅ Feedback Box */}
         <div className="w-full max-w-2xl mt-8">
           <h2 className="text-xl font-semibold mb-2">Submit Feedback</h2>
           <textarea
@@ -139,3 +140,4 @@ function App() {
 }
 
 export default App;
+
